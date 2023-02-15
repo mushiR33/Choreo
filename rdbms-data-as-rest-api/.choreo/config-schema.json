@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "jkcs": {
+      "type": "object",
+      "properties": {
+        "rdbms_data_as_rest_api": {
+          "type": "object",
+          "properties": {
+            "host": {
+              "type": "string",
+              "description": ""
+            },
+            "port": {
+              "type": "integer",
+              "description": ""
+            },
+            "user": {
+              "type": "string",
+              "description": ""
+            },
+            "password": {
+              "type": "string",
+              "description": ""
+            },
+            "database": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "host",
+            "port",
+            "user",
+            "password",
+            "database"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

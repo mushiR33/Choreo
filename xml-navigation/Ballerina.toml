@@ -1,0 +1,12 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.0.1"
+  export = ["xml_navigation"]
+  icon = "docs/icon.png"
+  keywords = ["Type/RestApi","Category/Service","Internal/http"]
+  name = "xml_navigation"
+  org = "jkcs"
+  version = "1.1.0"
+

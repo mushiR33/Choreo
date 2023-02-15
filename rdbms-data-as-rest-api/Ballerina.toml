@@ -1,0 +1,12 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.0.1"
+  export = ["rdbms_data_as_rest_api"]
+  icon = "docs/icon.png"
+  keywords = ["Type/RestApi","Category/Service","Internal/http"]
+  name = "rdbms_data_as_rest_api"
+  org = "jkcs"
+  version = "1.1.0"
+

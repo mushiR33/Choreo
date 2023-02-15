@@ -1,0 +1,12 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.0.1"
+  export = ["json_to_xml_conversion"]
+  icon = "docs/icon.png"
+  keywords = ["Type/RestApi","Category/Service","Internal/http"]
+  name = "json_to_xml_conversion"
+  org = "jkcs"
+  version = "1.1.0"
+

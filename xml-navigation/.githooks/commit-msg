@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "choreo-ref: $CHOREO_USER_IDP_ID" >> $1
