@@ -1,0 +1,5 @@
+USER="choreo"
+PASSWORD=""
+HOST="sahackathon.mysql.database.azure.com"
+PORT=3306
+DATABASE="mushthaq_sa_2023"
