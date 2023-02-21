@@ -1,0 +1,12 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.1.2"
+  export = ["catalogapi"]
+  icon = "docs/icon.png"
+  keywords = ["Type/GraphQL","Category/Service","Internal/http"]
+  name = "catalogapi"
+  org = "mmrhackathon2023consumer"
+  version = "1.0.1"
+
