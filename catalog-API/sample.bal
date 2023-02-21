@@ -3,7 +3,7 @@ import ballerinax/mysql.driver as _;
 import ballerina/graphql;
 import ballerina/sql;
 
-type Catalog record {
+type Item record {
     @sql:Column {name: "item_id"}
     readonly int itemID;
     @sql:Column {name: "item_name"}
@@ -12,16 +12,32 @@ type Catalog record {
     string itemDesc;
     @sql:Column {name: "item_image"}
     string itemImage;
-    // record {
-    //     @sql:Column {name: "includes"}
-    //     string includes;
-    //     @sql:Column {name: "intended_for"}
-    //     string intendedFor;
-    //     @sql:Column {name: "color"}
-    //     string color;
-    //     @sql:Column {name: "material"}
-    //     string material;
-    // } stockDetails;
+    @sql:Column {name: "s.includes"}
+    string includes;
+    @sql:Column {name: "intended_for"}
+    string intendedFor;
+    @sql:Column {name: "color"}
+    string color;
+    @sql:Column {name: "material"}
+    string material;
+    @sql:Column {name: "price"}
+    decimal price;
+};
+
+type Catalog record {
+    readonly int itemID;
+    string itemName;
+    string itemDesc;
+    string itemImage;
+    decimal price;
+    StockDetails stockDetails;
+
+};
+type StockDetails record {
+        string includes;
+        string intendedFor;
+        string color;
+        string material;
 };
 
 configurable string USER = ?;
@@ -54,49 +70,53 @@ public distinct service class CatalogData {
         return self.catalogRecord.itemImage;
     }
 
-    // resource function get includes() returns string {
-    //     return self.catalogRecord.stockDetails.includes;
-    // }
+    resource function get price() returns decimal {
+        return self.catalogRecord.price;
+    }
 
-    // resource function get intendedFor() returns string {
-    //     return self.catalogRecord.stockDetails.intendedFor;
-    // }
+    resource function get includes() returns string {
+        return self.catalogRecord.stockDetails.includes;
+    }
 
-    // resource function get color() returns string {
-    //     return self.catalogRecord.stockDetails.color;
-    // }
+    resource function get intendedFor() returns string {
+        return self.catalogRecord.stockDetails.intendedFor;
+    }
 
-    // resource function get material() returns string {
-    //     return self.catalogRecord.stockDetails.material;
-    // }
+    resource function get color() returns string {
+        return self.catalogRecord.stockDetails.color;
+    }
+
+    resource function get material() returns string {
+        return self.catalogRecord.stockDetails.material;
+    }
 }
 # A service representing a network-accessible GraphQL API
 service / on new graphql:Listener(8090) {
 
-    # A resource for generating greetings
-    # Example query:
-    # query GreetWorld{ 
-    # greeting(name: "World") 
-    # }
-    # Curl command: 
-    # curl -X POST -H "Content-Type: application/json" -d '{"query": "query GreetWorld{ greeting(name:\"World\") }"}' http://localhost:8090
-    #
-    # + return - string name with greeting message or error
     resource function get catalogs() returns Catalog[]|error {
         return getAllItems();
     }
 
 }
 
-mysql:Client mysqlEp = check new (host = HOST, user = USER, password = PASSWORD, database = DATABASE, port = PORT);
+mysql:Client mysqlEp = check new (host = HOST, user = USER, password = PASSWORD, database = DATABASE, port = PORT, connectionPool={maxOpenConnections: 3});
 
 function getAllItems() returns Catalog[]|error {
     Catalog[] catalogs = [];
-    stream<Catalog, error?> resultStream = mysqlEp->query(
+    stream<Item, error?> resultStream = mysqlEp->query(
         `SELECT * FROM items i, stock s where i.item_id=s.item_id`
     );
-    check from Catalog catalog in resultStream
+    check from Item item in resultStream
         do {
+            Catalog catalog = {
+                itemID: item.itemID,
+                itemDesc: item.itemDesc,
+                itemImage: item.itemImage,
+                itemName: item.itemName,
+                price: item.price,
+                stockDetails: {includes: item.includes, intendedFor: item.intendedFor, color: item.color, material: item.material}
+            };
+
             catalogs.push(catalog);
         };
     check resultStream.close();
