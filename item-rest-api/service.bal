@@ -2,6 +2,7 @@ import ballerina/http;
 import ballerinax/mysql;
 import ballerinax/mysql.driver as _;
 import ballerina/sql;
+import ballerina/log;
 
 type Item record {
     @sql:Column {name: "item_id"}
@@ -89,6 +90,7 @@ service / on new http:Listener(9090) {
             WHERE item_id = ${itemPayload.itemID}  
         `);
         int|string? lastInsertId = result.lastInsertId;
+        log:printInfo(<string>lastInsertId);
 
         sql:ExecutionResult resultStock = check mysqlEp->execute(`
             UPDATE stock SET
@@ -96,11 +98,12 @@ service / on new http:Listener(9090) {
                 price = ${itemPayload.price},
                 color = ${itemPayload.stockDetails.color},
                 material = ${itemPayload.stockDetails.material},
+                quantity = ${itemPayload.stockDetails.quantity}
             intended_for = ${itemPayload.stockDetails.intendedFor}
             WHERE item_id = ${itemPayload.itemID}  
         `);
         int|string? insertId = resultStock.lastInsertId;
-
+        log:printInfo(<string>insertId);
         if lastInsertId is int && insertId is int {
             return <http:Ok>{};
         } else {
