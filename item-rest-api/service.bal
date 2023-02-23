@@ -98,8 +98,8 @@ service / on new http:Listener(9090) {
                 price = ${itemPayload.price},
                 color = ${itemPayload.stockDetails.color},
                 material = ${itemPayload.stockDetails.material},
-                quantity = ${itemPayload.stockDetails.quantity}
-            intended_for = ${itemPayload.stockDetails.intendedFor}
+                quantity = ${itemPayload.stockDetails.quantity},
+                intended_for = ${itemPayload.stockDetails.intendedFor}
             WHERE item_id = ${itemPayload.itemID}  
         `);
         int|string? insertId = resultStock.lastInsertId;
