@@ -2,7 +2,6 @@ import ballerina/http;
 import ballerinax/mysql;
 import ballerinax/mysql.driver as _;
 import ballerina/sql;
-import ballerina/log;
 
 type Item record {
     @sql:Column {name: "item_id"}
