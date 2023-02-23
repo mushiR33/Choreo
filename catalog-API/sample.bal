@@ -22,6 +22,8 @@ type Item record {
     string material;
     @sql:Column {name: "price"}
     decimal price;
+    @sql:Column {name: "quantity"}
+    int quantity;
 };
 
 type Catalog record {
@@ -38,6 +40,7 @@ type StockDetails record {
         string intendedFor;
         string color;
         string material;
+        int quantity;
 };
 
 configurable string USER = ?;
@@ -89,6 +92,10 @@ public distinct service class CatalogData {
     resource function get material() returns string {
         return self.catalogRecord.stockDetails.material;
     }
+
+    resource function get quantity() returns int {
+        return self.catalogRecord.stockDetails.quantity;
+    }
 }
 # A service representing a network-accessible GraphQL API
 service / on new graphql:Listener(8090) {
@@ -114,7 +121,7 @@ function getAllItems() returns Catalog[]|error {
                 itemImage: item.itemImage,
                 itemName: item.itemName,
                 price: item.price,
-                stockDetails: {includes: item.includes, intendedFor: item.intendedFor, color: item.color, material: item.material}
+                stockDetails: {includes: item.includes, intendedFor: item.intendedFor, color: item.color, material: item.material, quantity: item.quantity}
             };
 
             catalogs.push(catalog);
