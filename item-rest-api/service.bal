@@ -89,8 +89,6 @@ service / on new http:Listener(9090) {
                 price = ${itemPayload.price}
             WHERE item_id = ${itemPayload.itemID}  
         `);
-        int|string? lastInsertId = result.lastInsertId;
-        log:printInfo(lastInsertId.toString());
 
         sql:ExecutionResult resultStock = check mysqlEp->execute(`
             UPDATE stock SET
@@ -102,9 +100,7 @@ service / on new http:Listener(9090) {
                 intended_for = ${itemPayload.stockDetails.intendedFor}
             WHERE item_id = ${itemPayload.itemID}  
         `);
-        int|string? insertId = resultStock.lastInsertId;
-        log:printInfo(insertId.toString());
-        if lastInsertId is int && insertId is int {
+        if result.affectedRowCount > 0 && resultStock.affectedRowCount > 0 {
             return <http:Ok>{};
         } else {
             return error("Unable to update");
