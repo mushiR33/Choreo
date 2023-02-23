@@ -92,12 +92,11 @@ service / on new http:Listener(9090) {
 
         sql:ExecutionResult resultStock = check mysqlEp->execute(`
             UPDATE stock SET
-                includes = ${itemPayload.itemName}, 
-                price = ${itemPayload.itemDesc},
-                color = ${itemPayload.itemImage},
+                includes = ${itemPayload.stockDetails.includes}, 
                 price = ${itemPayload.price},
-                material = ${itemPayload.price},
-            intended_for = ${itemPayload.price}
+                color = ${itemPayload.stockDetails.color},
+                material = ${itemPayload.stockDetails.material},
+            intended_for = ${itemPayload.stockDetails.intendedFor}
             WHERE item_id = ${itemPayload.itemID}  
         `);
         int|string? insertId = resultStock.lastInsertId;
