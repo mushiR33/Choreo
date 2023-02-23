@@ -1,0 +1,9 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.3.1"
+  name = "item_api"
+  org = "mmrhackathon2023consumer"
+  version = "0.1.0"
+
