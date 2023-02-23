@@ -90,7 +90,7 @@ service / on new http:Listener(9090) {
             WHERE item_id = ${itemPayload.itemID}  
         `);
         int|string? lastInsertId = result.lastInsertId;
-        log:printInfo(<string>lastInsertId);
+        log:printInfo(lastInsertId.toString());
 
         sql:ExecutionResult resultStock = check mysqlEp->execute(`
             UPDATE stock SET
@@ -103,7 +103,7 @@ service / on new http:Listener(9090) {
             WHERE item_id = ${itemPayload.itemID}  
         `);
         int|string? insertId = resultStock.lastInsertId;
-        log:printInfo(<string>insertId);
+        log:printInfo(insertId.toString());
         if lastInsertId is int && insertId is int {
             return <http:Ok>{};
         } else {
