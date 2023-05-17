@@ -1,0 +1,10 @@
+---
+key: "FileProxyService_proxy-1.0.0"
+name : "FileProxyService"
+displayName : "FileProxyService"
+description: "Sample Proxy Service"
+version: "1.0.0"
+serviceUrl: "https://{MI_HOST}:{MI_PORT}/services/FileProxyService"
+definitionType: "WSDL1"
+securityType: "BASIC"
+mutualSSLEnabled: false

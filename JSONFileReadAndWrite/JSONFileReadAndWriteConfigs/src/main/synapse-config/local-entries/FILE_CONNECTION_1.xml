@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<localEntry xmlns="http://ws.apache.org/ns/synapse" key="FILE_CONNECTION_1">
+    <file.init>
+        <workingDir>/Users/mushthaqrumy/Documents/APIM/Fresh/BlackHawk/Fresh/APIM-Fresh/wso2am-4.1.0/repository/conf/SampleJson.json</workingDir>
+        <name>FILE_CONNECTION_1</name>
+        <fileLockScheme>Local</fileLockScheme>
+        <connectionType>LOCAL</connectionType>
+    </file.init>
+</localEntry>

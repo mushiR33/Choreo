@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Database_Sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <iterate expression="json-eval($.students)">
+        <target>
+            <sequence>
+                <property expression="json-eval($.fname)" name="firstName" scope="default" type="STRING"/>
+                <property expression="json-eval($.lname)" name="lastName" scope="default" type="STRING"/>
+                <property expression="json-eval($.phone)" name="phone" scope="default" type="STRING"/>
+                <dbreport>
+                    <connection>
+                        <pool>
+                            <driver>com.mysql.jdbc.Driver</driver>
+                            <url>jdbc:mysql://localhost:3306/Employees</url>
+                            <user>root</user>
+                            <password>root</password>
+                        </pool>
+                    </connection>
+                    <statement>
+                        <sql><![CDATA[insert into Student(first_name, last_name, phone) values (?, ?, ?)]]></sql>
+                        <parameter expression="$ctx:firstName" type="VARCHAR"/>
+                        <parameter expression="$ctx:lastName" type="VARCHAR"/>
+                        <parameter expression="$ctx:phone" type="VARCHAR"/>
+                    </statement>
+                </dbreport>
+            </sequence>
+        </target>
+    </iterate>
+    <log level="custom">
+        <property name="EndLog" value="Records Persisted"/>
+    </log>
+</sequence>

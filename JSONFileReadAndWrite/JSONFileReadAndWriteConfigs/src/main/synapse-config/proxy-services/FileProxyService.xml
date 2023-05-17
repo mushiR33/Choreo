@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="FileProxyService" startOnLoad="true" transports="vfs http https" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <sequence key="JSONPayload"/>
+            <drop/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+    <parameter name="transport.vfs.Streaming">true</parameter>
+    <parameter name="transport.PollInterval">15</parameter>
+    <parameter name="transport.vfs.FileURI">file:///Users/mushthaqrumy/Documents/APIM/FileUploads</parameter>
+    <parameter name="transport.vfs.ContentType">application/json</parameter>
+    <parameter name="transport.vfs.ActionAfterProcess">MOVE</parameter>
+    <parameter name="transport.vfs.MoveAfterFailure">file:///Users/mushthaqrumy/Documents/APIM/FileUploads/Failure</parameter>
+    <parameter name="transport.vfs.ActionAfterFailure">MOVE</parameter>
+    <parameter name="transport.vfs.FileNamePattern">.*.json</parameter>
+    <parameter name="transport.vfs.MoveAfterProcess">file:///Users/mushthaqrumy/Documents/APIM/FileUploads/Success</parameter>
+</proxy>

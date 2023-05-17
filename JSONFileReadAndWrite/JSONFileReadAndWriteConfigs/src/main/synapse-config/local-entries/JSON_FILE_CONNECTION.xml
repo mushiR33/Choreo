@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="JSON_FILE_CONNECTION" xmlns="http://ws.apache.org/ns/synapse">
+    <file.init>
+        <workingDir>/Users/mushthaqrumy/Documents/APIM/FileUploads</workingDir>
+        <name>JSON_FILE_CONNECTION</name>
+        <fileLockScheme>Local</fileLockScheme>
+        <connectionType>LOCAL</connectionType>
+    </file.init>
+</localEntry>

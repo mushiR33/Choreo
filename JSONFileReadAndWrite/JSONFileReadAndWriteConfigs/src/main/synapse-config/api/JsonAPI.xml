@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/json" name="JsonAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" url-mapping="/filepost">
+        <inSequence>
+            <property expression="fn:substring-after(get-property('MessageID'),'uuid:')" name="UUID" scope="default" type="STRING"/>
+            <property expression="fn:concat($ctx:UUID,'.json')" name="fileName" scope="default" type="STRING"/>
+            <property expression="fn:concat('/',$ctx:fileName)" name="fileNameWithPath" scope="default" type="STRING"/>
+            <file.write configKey="JSON_FILE_CONNECTION">
+                <filePath>{get-property('fileNameWithPath')}</filePath>
+                <mimeType>application/json</mimeType>
+                <compress>false</compress>
+                <writeMode>Overwrite</writeMode>
+                <enableStreaming>false</enableStreaming>
+                <appendNewLine>false</appendNewLine>
+                <enableLock>false</enableLock>
+                <includeResultTo>Message Body</includeResultTo>
+                <updateLastModified>true</updateLastModified>
+            </file.write>
+            <log level="custom">
+                <property name="PayloadLog" value="Payload written to file"/>
+            </log>
+            <log level="custom">
+                <property expression="get-property('fileName')" name="FileName"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" url-mapping="/filepostnew">
+        <inSequence>
+            <log level="custom">
+                <property name="MSReceived" value="Message Received"/>
+            </log>
+            <store messageStore="JDBCMessageStore"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" url-mapping="/filedirectpost">
+        <inSequence>
+            <log level="custom">
+                <property name="MSReceived" value="Message Received"/>
+            </log>
+            <sequence key="Database_Sequence"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

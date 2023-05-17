@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="JsonAPI" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/JsonAPI.xml</file>
+    </artifact>
+    <artifact name="JsonAPI_swagger" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/JsonAPI_swagger.yaml</file>
+    </artifact>
+    <artifact name="JsonAPI_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/JsonAPI_metadata.yaml</file>
+    </artifact>
+    <artifact name="FILE_CONNECTION_1" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>/src/main/synapse-config/local-entries/FILE_CONNECTION_1.xml</file>
+    </artifact>
+    <artifact name="Database_Sequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/Database_Sequence.xml</file>
+    </artifact>
+    <artifact name="JSON_FILE_CONNECTION" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>/src/main/synapse-config/local-entries/JSON_FILE_CONNECTION.xml</file>
+    </artifact>
+    <artifact name="FileAddress" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/FileAddress.xml</file>
+    </artifact>
+    <artifact name="FileProxyService" groupId="com.example.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/FileProxyService.xml</file>
+    </artifact>
+    <artifact name="FileProxyService_proxy_metadata" groupId="com.example.metadata" version="1.0.0" type="synapse/metadata" serverRole="EnterpriseServiceBus">
+        <file>src/main/resources/metadata/FileProxyService_proxy_metadata.yaml</file>
+    </artifact>
+    <artifact name="JDBCMessageStore" groupId="com.example.message-store" version="1.0.0" type="synapse/message-store" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/message-stores/JDBCMessageStore.xml</file>
+    </artifact>
+    <artifact name="JDBCMessageStoreProcessor" groupId="com.example.message-processors" version="1.0.0" type="synapse/message-processors" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/message-processors/JDBCMessageStoreProcessor.xml</file>
+    </artifact>
+    <artifact name="JSONPayload" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/JSONPayload.xml</file>
+    </artifact>
+    <artifact name="DSSEndpoint" groupId="com.example.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/DSSEndpoint.xml</file>
+    </artifact>
+</artifacts>

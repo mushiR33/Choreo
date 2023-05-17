@@ -1,0 +1,29 @@
+<data disableLegacyBoxcarringMode="true" enableBatchRequests="true" enableBoxcarring="true" name="DSSCallMediatorTest" transports="http https local">
+	<config enableOData="false" id="01">
+      <property name="driverClassName">com.mysql.jdbc.Driver</property>
+      <property name="url">jdbc:mysql://localhost:3306/Employees</property>
+      <property name="username">root</property>
+      <property name="password">root</property>
+   	</config>
+   	<query id="addStudentQuery" useConfig="01">
+      <sql>insert into Student(first_name, last_name, phone) values(:fname,:lname,:phone)</sql>
+      <param name="fname" sqlType="STRING"/>
+      <param name="lname" sqlType="STRING"/>
+      <param name="phone" sqlType="STRING"/>
+   </query>
+   <operation name="addStudent" returnRequestStatus="true">
+      <call-query href="addStudentQuery">
+         <with-param name="fname" query-param="fname"/>
+         <with-param name="lname" query-param="lname"/>
+         <with-param name="phone" query-param="phone"/>
+      </call-query>
+   </operation>
+   <resource method="POST" path="/Student">
+      <call-query href="addStudentQuery">
+         <with-param name="fname" query-param="fname"/>
+         <with-param name="lname" query-param="lname"/>
+         <with-param name="phone" query-param="phone"/>
+      </call-query>
+   </resource>
+    <description/>
+</data>
