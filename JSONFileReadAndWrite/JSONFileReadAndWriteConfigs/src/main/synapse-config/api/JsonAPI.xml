@@ -27,26 +27,4 @@
         <outSequence/>
         <faultSequence/>
     </resource>
-    <resource methods="POST" url-mapping="/filepostnew">
-        <inSequence>
-            <log level="custom">
-                <property name="MSReceived" value="Message Received"/>
-            </log>
-            <store messageStore="JDBCMessageStore"/>
-            <respond/>
-        </inSequence>
-        <outSequence/>
-        <faultSequence/>
-    </resource>
-    <resource methods="POST" url-mapping="/filedirectpost">
-        <inSequence>
-            <log level="custom">
-                <property name="MSReceived" value="Message Received"/>
-            </log>
-            <sequence key="Database_Sequence"/>
-            <respond/>
-        </inSequence>
-        <outSequence/>
-        <faultSequence/>
-    </resource>
 </api>

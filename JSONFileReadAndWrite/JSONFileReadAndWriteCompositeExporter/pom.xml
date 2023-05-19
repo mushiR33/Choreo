@@ -14,16 +14,13 @@
   <name>JSONFileReadAndWriteCompositeExporter</name>
   <description>JSONFileReadAndWriteCompositeExporter</description>
   <properties>
-    <com.example.message-store_._JDBCMessageStore>capp/EnterpriseServiceBus</com.example.message-store_._JDBCMessageStore>
     <com.example.api_._JsonAPI>capp/EnterpriseServiceBus</com.example.api_._JsonAPI>
     <com.example.metadata_._FileProxyService_proxy_metadata>capp/EnterpriseServiceBus</com.example.metadata_._FileProxyService_proxy_metadata>
     <com.example.local-entry_._JSON_FILE_CONNECTION>capp/EnterpriseServiceBus</com.example.local-entry_._JSON_FILE_CONNECTION>
     <com.example.metadata_._JsonAPI_metadata>capp/EnterpriseServiceBus</com.example.metadata_._JsonAPI_metadata>
-    <com.example.message-processors_._JDBCMessageStoreProcessor>capp/EnterpriseServiceBus</com.example.message-processors_._JDBCMessageStoreProcessor>
     <com.example.endpoint_._DSSEndpoint>capp/EnterpriseServiceBus</com.example.endpoint_._DSSEndpoint>
     <com.example.dataservice_._DSSCallMediatorTest>capp/DataServicesServer</com.example.dataservice_._DSSCallMediatorTest>
     <com.example.proxy-service_._FileProxyService>capp/EnterpriseServiceBus</com.example.proxy-service_._FileProxyService>
-    <com.example.sequence_._Database_Sequence>capp/EnterpriseServiceBus</com.example.sequence_._Database_Sequence>
     <com.example.lib_._file-connector>capp/EnterpriseServiceBus</com.example.lib_._file-connector>
     <com.example.metadata_._JsonAPI_swagger>capp/EnterpriseServiceBus</com.example.metadata_._JsonAPI_swagger>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
@@ -31,12 +28,6 @@
     <com.example.sequence_._JSONPayload>capp/EnterpriseServiceBus</com.example.sequence_._JSONPayload>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>com.example.message-store</groupId>
-      <artifactId>JDBCMessageStore</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
     <dependency>
       <groupId>com.example.api</groupId>
       <artifactId>JsonAPI</artifactId>
@@ -62,12 +53,6 @@
       <type>yaml</type>
     </dependency>
     <dependency>
-      <groupId>com.example.message-processors</groupId>
-      <artifactId>JDBCMessageStoreProcessor</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
       <groupId>com.example.endpoint</groupId>
       <artifactId>DSSEndpoint</artifactId>
       <version>1.0.0</version>
@@ -82,12 +67,6 @@
     <dependency>
       <groupId>com.example.proxy-service</groupId>
       <artifactId>FileProxyService</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.sequence</groupId>
-      <artifactId>Database_Sequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
