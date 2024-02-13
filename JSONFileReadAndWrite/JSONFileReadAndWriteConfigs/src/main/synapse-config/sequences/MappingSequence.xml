@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MappingSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log/>
+    <script language="js"><![CDATA[payload = mc.getPayloadJSON();
+        bookingDetails = payload.bookingDetails;
+        specialRequestsArr = bookingDetails.specialRequests;
+        guest = payload.guest;
+        var response = new Object();
+        response.first_name = guest.firstName;
+        response.last_name = guest.lastName;
+        response.email = guest.email_address;
+        response.phone = guest.phone;
+        response.hotel_code = bookingDetails.hotelCode;
+        response.hotel_name = bookingDetails.hotelName;
+        response.checkin_date = bookingDetails.checkinDate;
+        response.checkout_date = bookingDetails.checkoutDate;
+        response.no_rooms = bookingDetails.noRooms;
+        response.special_requests = specialRequestsArr.join(",");
+        mc.setPayloadJSON(response);]]></script>
+    <log level="full"/>
+</sequence>

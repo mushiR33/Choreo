@@ -2,4 +2,7 @@
     <artifact name="DSSCallMediatorTest" groupId="com.example.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
         <file>dataservice/DSSCallMediatorTest.dbs</file>
     </artifact>
+    <artifact name="ReservationDSS" groupId="com.example.dataservice" version="1.0.0" type="service/dataservice" serverRole="DataServicesServer">
+        <file>dataservice/ReservationDSS.dbs</file>
+    </artifact>
 </artifacts>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datamapper:DataMapperRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:datamapper="http:///org/wso2/developerstudio/eclipse/gmf/datamapper">
+  <input>
+    <treeNode name="root" schemaDataType="OBJECT" level="1">
+      <node name="reservation" level="2">
+        <node name="guest" schemaDataType="OBJECT" level="3">
+          <node name="firstName" schemaDataType="STRING" level="4">
+            <properties key="type" value="string"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/guest/firstName"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.0/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <node name="lastName" schemaDataType="STRING" level="4">
+            <properties key="type" value="string"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/guest/lastName"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.1/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <node name="email_address" schemaDataType="STRING" level="4">
+            <properties key="type" value="string"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/guest/email_address"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.2/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <node name="phone" schemaDataType="STRING" level="4">
+            <properties key="type" value="string"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/guest/phone"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.3/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <properties key="type" value="object"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservation/0/guest"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode/>
+        </node>
+        <node name="bookingDetails" schemaDataType="OBJECT" level="3">
+          <node name="hotelCode" schemaDataType="STRING" level="4">
+            <properties key="type" value="string"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/bookingDetails/hotelCode"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.4/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <node name="hotelName" schemaDataType="STRING" level="4">
+            <properties key="type" value="string"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/bookingDetails/hotelName"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.5/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <node name="checkinDate" schemaDataType="STRING" level="4">
+            <properties key="type" value="string"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/bookingDetails/checkinDate"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.6/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <node name="checkoutDate" schemaDataType="STRING" level="4">
+            <properties key="type" value="string"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/bookingDetails/checkoutDate"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.7/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <node name="noRooms" schemaDataType="NUMBER" level="4">
+            <properties key="type" value="number"/>
+            <properties key="id" value="http://wso2jsonschema.org/reservation/0/bookingDetails/noRooms"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink/>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.8/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <node name="specialRequests" level="4">
+            <properties key="type" value="string"/>
+            <properties key="items_id" value="/0"/>
+            <properties key="items_type" value="string"/>
+            <properties key="nullable" value="false"/>
+            <outNode>
+              <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.9/@inNode"/>
+            </outNode>
+            <inNode/>
+          </node>
+          <properties key="type" value="object"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservation/0/bookingDetails"/>
+          <properties key="nullable" value="false"/>
+          <properties key="properties_id" value="{firstName={id=http://wso2jsonschema.org/reservation/0/guest/firstName, type=string}, lastName={id=http://wso2jsonschema.org/reservation/0/guest/lastName, type=string}, email_address={id=http://wso2jsonschema.org/reservation/0/guest/email_address, type=string}, phone={id=http://wso2jsonschema.org/reservation/0/guest/phone, type=string}}"/>
+          <properties key="properties_id" value="{hotelCode={id=http://wso2jsonschema.org/reservation/0/bookingDetails/hotelCode, type=string}, hotelName={id=http://wso2jsonschema.org/reservation/0/bookingDetails/hotelName, type=string}, checkinDate={id=http://wso2jsonschema.org/reservation/0/bookingDetails/checkinDate, type=string}, checkoutDate={id=http://wso2jsonschema.org/reservation/0/bookingDetails/checkoutDate, type=string}, noRooms={id=http://wso2jsonschema.org/reservation/0/bookingDetails/noRooms, type=number}, specialRequests={id=http://wso2jsonschema.org/reservation/0/bookingDetails/specialRequests, type=array, items=[{id=http://wso2jsonschema.org/reservation/0/bookingDetails/specialRequests/0, type=string}]}}"/>
+          <outNode/>
+          <inNode/>
+        </node>
+        <properties key="type" value="array"/>
+        <properties key="id" value="http://wso2jsonschema.org/reservation"/>
+        <properties key="items_id" value="http://wso2jsonschema.org/reservation/0"/>
+        <properties key="items_type" value="object"/>
+        <properties key="nullable" value="false"/>
+        <properties key="properties_id" value="{guest={id=http://wso2jsonschema.org/reservation/0/guest, type=object, properties={firstName={id=http://wso2jsonschema.org/reservation/0/guest/firstName, type=string}, lastName={id=http://wso2jsonschema.org/reservation/0/guest/lastName, type=string}, email_address={id=http://wso2jsonschema.org/reservation/0/guest/email_address, type=string}, phone={id=http://wso2jsonschema.org/reservation/0/guest/phone, type=string}}}, bookingDetails={id=http://wso2jsonschema.org/reservation/0/bookingDetails, type=object, properties={hotelCode={id=http://wso2jsonschema.org/reservation/0/bookingDetails/hotelCode, type=string}, hotelName={id=http://wso2jsonschema.org/reservation/0/bookingDetails/hotelName, type=string}, checkinDate={id=http://wso2jsonschema.org/reservation/0/bookingDetails/checkinDate, type=string}, checkoutDate={id=http://wso2jsonschema.org/reservation/0/bookingDetails/checkoutDate, type=string}, noRooms={id=http://wso2jsonschema.org/reservation/0/bookingDetails/noRooms, type=number}, specialRequests={id=http://wso2jsonschema.org/reservation/0/bookingDetails/specialRequests, type=array, items=[{id=http://wso2jsonschema.org/reservation/0/bookingDetails/specialRequests/0, type=string}]}}}}"/>
+        <outNode/>
+        <inNode/>
+      </node>
+      <properties key="type" value="object"/>
+      <properties key="$schema" value="http://wso2.org/json-schema/wso2-data-mapper-v5.0.0/schema#"/>
+      <properties key="id" value="http://wso2jsonschema.org"/>
+      <properties key="nullable" value="false"/>
+      <outNode/>
+      <inNode/>
+    </treeNode>
+  </input>
+  <output>
+    <treeNode name="root" schemaDataType="OBJECT" level="1">
+      <node name="reservation" level="2">
+        <node name="first_name" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/first_name"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.0/@node.0/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="last_name" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/last_name"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.0/@node.1/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="email" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/email"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.0/@node.2/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="phone" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/phone"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.0/@node.3/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="hotel_code" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/hotel_code"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.1/@node.0/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="hotel_name" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/hotel_name"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.1/@node.1/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="checkin_date" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/checkin_date"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.1/@node.2/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="checkout_date" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/checkout_date"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.1/@node.3/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="no_rooms" schemaDataType="NUMBER" level="3">
+          <properties key="type" value="number"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/no_rooms"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.1/@node.4/@outNode/@outgoingLink.1"/>
+        </node>
+        <node name="special_requests" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/reservations/0/special_requests"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.1/@node.5/@outNode/@outgoingLink.0"/>
+        </node>
+        <properties key="added_properties_id" value="hasProperties"/>
+        <properties key="$schema" value="http://wso2.org/json-schema/wso2-data-mapper-v5.0.0/schema#"/>
+        <properties key="nullable" value="false"/>
+        <properties key="items_id" value="http://wso2jsonschema.org/reservations/0"/>
+        <properties key="items_type" value="object"/>
+        <properties key="id" value="http://wso2jsonschema.org/reservations"/>
+        <properties key="type" value="array"/>
+        <outNode/>
+        <inNode/>
+      </node>
+      <properties key="type" value="object"/>
+      <properties key="$schema" value="http://wso2.org/json-schema/wso2-data-mapper-v5.0.0/schema#"/>
+      <properties key="id" value="http://wso2jsonschema.org"/>
+      <properties key="nullable" value="false"/>
+      <outNode/>
+      <inNode/>
+    </treeNode>
+  </output>
+</datamapper:DataMapperRoot>

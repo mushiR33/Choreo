@@ -1,0 +1,59 @@
+{
+  "$schema" : "http://wso2.org/json-schema/wso2-data-mapper-v5.0.0/schema#",
+  "outputType" : "JSON",
+  "id" : "http://wso2jsonschema.org",
+  "title" : "root",
+  "type" : "object",
+  "properties" : {
+    "reservation" : {
+      "id" : "http://wso2jsonschema.org/reservations",
+      "type" : "array",
+      "items" : [ {
+        "id" : "http://wso2jsonschema.org/reservations/0",
+        "type" : "object",
+        "properties" : {
+          "first_name" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/first_name",
+            "type" : "string"
+          },
+          "last_name" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/last_name",
+            "type" : "string"
+          },
+          "email" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/email",
+            "type" : "string"
+          },
+          "phone" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/phone",
+            "type" : "string"
+          },
+          "hotel_code" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/hotel_code",
+            "type" : "string"
+          },
+          "hotel_name" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/hotel_name",
+            "type" : "string"
+          },
+          "checkin_date" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/checkin_date",
+            "type" : "string"
+          },
+          "checkout_date" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/checkout_date",
+            "type" : "string"
+          },
+          "no_rooms" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/no_rooms",
+            "type" : "number"
+          },
+          "special_requests" : {
+            "id" : "http://wso2jsonschema.org/reservations/0/special_requests",
+            "type" : "string"
+          }
+        }
+      } ]
+    }
+  }
+}

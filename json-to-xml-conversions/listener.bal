@@ -30,13 +30,17 @@ service "localObserver" on inFolder {
         log:printInfo("Create: " + m.name);
         do {
 	        json readJson = check io:fileReadJson(m.name);
+            log:printInfo("After Read JSON!!!");
+            log:printInfo("Before Clone!!!");
             Students students = check readJson.cloneWithType(Students);
+            log:printInfo("After Clone JSON!!!");
             // Create a batch parameterized query.
             sql:ParameterizedQuery[] insertQueries = from StudentsItem studentsItem in students.students
             select `INSERT INTO Student (first_name, last_name, phone) 
                     VALUES (${studentsItem.fname}, ${studentsItem.lname}, ${studentsItem.phone})`;
 
         // Insert records in a batch.
+        log:printInfo("Before DB Write!!!");
         _ = check db->batchExecute(insertQueries);
         log:printInfo("Processing completed!!!");
         check file:remove(m.name);

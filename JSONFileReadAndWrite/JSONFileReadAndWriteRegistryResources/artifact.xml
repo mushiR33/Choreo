@@ -1,1 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?><artifacts/>
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="DataMapperConfig" groupId="com.example.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseServiceBus">
+        <item>
+            <file>DataMapperConfig.dmc</file>
+            <path>/_system/governance/datamapper</path>
+            <mediaType>text/plain</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="DataMapperConfig_inputSchema" groupId="com.example.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseServiceBus">
+        <item>
+            <file>DataMapperConfig_inputSchema.json</file>
+            <path>/_system/governance/datamapper</path>
+            <mediaType>text/plain</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="DataMapperConfig_outputSchema" groupId="com.example.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseServiceBus">
+        <item>
+            <file>DataMapperConfig_outputSchema.json</file>
+            <path>/_system/governance/datamapper</path>
+            <mediaType>text/plain</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="DataMapperConfig_xsltStyleSheet" groupId="com.example.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseServiceBus">
+        <item>
+            <file>DataMapperConfig_xsltStyleSheet.xml</file>
+            <path>/_system/governance/datamapper</path>
+            <mediaType>text/plain</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+</artifacts>

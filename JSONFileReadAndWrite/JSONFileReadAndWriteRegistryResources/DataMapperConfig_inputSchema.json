@@ -1,0 +1,71 @@
+{
+  "$schema" : "http://wso2.org/json-schema/wso2-data-mapper-v5.0.0/schema#",
+  "inputType" : "JSON",
+  "id" : "http://wso2jsonschema.org",
+  "title" : "root",
+  "type" : "object",
+  "properties" : {
+    "reservation" : {
+      "id" : "http://wso2jsonschema.org/reservation",
+      "type" : "array",
+      "items" : [ {
+        "id" : "http://wso2jsonschema.org/reservation/0",
+        "type" : "object",
+        "properties" : {
+          "guest" : {
+            "id" : "http://wso2jsonschema.org/reservation/0/guest",
+            "type" : "object",
+            "properties" : {
+              "firstName" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/guest/firstName",
+                "type" : "string"
+              },
+              "lastName" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/guest/lastName",
+                "type" : "string"
+              },
+              "email_address" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/guest/email_address",
+                "type" : "string"
+              },
+              "phone" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/guest/phone",
+                "type" : "string"
+              }
+            }
+          },
+          "bookingDetails" : {
+            "id" : "http://wso2jsonschema.org/reservation/0/bookingDetails",
+            "type" : "object",
+            "properties" : {
+              "hotelCode" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/bookingDetails/hotelCode",
+                "type" : "string"
+              },
+              "hotelName" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/bookingDetails/hotelName",
+                "type" : "string"
+              },
+              "checkinDate" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/bookingDetails/checkinDate",
+                "type" : "string"
+              },
+              "checkoutDate" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/bookingDetails/checkoutDate",
+                "type" : "string"
+              },
+              "noRooms" : {
+                "id" : "http://wso2jsonschema.org/reservation/0/bookingDetails/noRooms",
+                "type" : "number"
+              },
+              "specialRequests" : {
+                "id" : "null/0",
+                "type" : "string"
+              }
+            }
+          }
+        }
+      } ]
+    }
+  }
+}

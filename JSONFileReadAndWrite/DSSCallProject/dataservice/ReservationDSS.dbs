@@ -1,0 +1,50 @@
+<data disableLegacyBoxcarringMode="true" enableBatchRequests="true" enableBoxcarring="true" name="ReservationDSS" transports="http https local">
+	<config enableOData="false" id="01">
+      <property name="driverClassName">com.mysql.jdbc.Driver</property>
+      <property name="url">jdbc:mysql://localhost:3306/reservations</property>
+      <property name="username">root</property>
+      <property name="password">root</property>
+   	</config>
+   	<query id="addReservationQuery" useConfig="01">
+      <sql>insert into walkins(first_name, last_name, email, phone, hotel_code, hotel_name, checkin_date, checkout_date, no_rooms, special_requests) values(:first_name, :last_name, :email, :phone, :hotel_code, :hotel_name, :checkin_date, :checkout_date, :no_rooms, :special_requests)</sql>
+      <param name="first_name" sqlType="STRING"/>
+      <param name="last_name" sqlType="STRING"/>
+      <param name="email" sqlType="STRING"/>
+      <param name="phone" sqlType="STRING"/>
+      <param name="hotel_code" sqlType="STRING"/>
+      <param name="hotel_name" sqlType="STRING"/>
+      <param name="checkin_date" sqlType="STRING"/>
+      <param name="checkout_date" sqlType="STRING"/>
+      <param name="no_rooms" sqlType="INTEGER"/>
+      <param name="special_requests" sqlType="STRING"/>
+   </query>
+   <operation name="addStudent" returnRequestStatus="true">
+      <call-query href="addReservationQuery">
+         <with-param name="first_name" query-param="first_name"/>
+         <with-param name="last_name" query-param="last_name"/>
+         <with-param name="email" query-param="email"/>
+         <with-param name="phone" query-param="phone"/>
+         <with-param name="hotel_code" query-param="hotel_code"/>
+         <with-param name="hotel_name" query-param="hotel_name"/>
+         <with-param name="checkin_date" query-param="checkin_date"/>
+         <with-param name="checkout_date" query-param="checkout_date"/>
+         <with-param name="no_rooms" query-param="no_rooms"/>
+         <with-param name="special_requests" query-param="special_requests"/>
+      </call-query>
+   </operation>
+   <resource method="POST" path="/reservation">
+      <call-query href="addReservationQuery">
+         <with-param name="first_name" query-param="first_name"/>
+         <with-param name="last_name" query-param="last_name"/>
+         <with-param name="email" query-param="email"/>
+         <with-param name="phone" query-param="phone"/>
+         <with-param name="hotel_code" query-param="hotel_code"/>
+         <with-param name="hotel_name" query-param="hotel_name"/>
+         <with-param name="checkin_date" query-param="checkin_date"/>
+         <with-param name="checkout_date" query-param="checkout_date"/>
+         <with-param name="no_rooms" query-param="no_rooms"/>
+         <with-param name="special_requests" query-param="special_requests"/>
+      </call-query>
+   </resource>
+    <description/>
+</data>

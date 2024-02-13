@@ -1,0 +1,36 @@
+map_S_root_S_root = function(){ 
+var outputroot={};
+
+var count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7 = 0;
+outputroot =  {};
+outputroot.reservation =  [];
+
+for(i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7 in inputroot.reservation){
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7] =  {};
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].first_name = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].guest.firstName;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].last_name = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].guest.lastName;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].email = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].guest.email_address;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].phone = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].guest.phone;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].hotel_code = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].bookingDetails.hotelCode;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].hotel_name = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].bookingDetails.hotelName;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].checkin_date = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].bookingDetails.checkinDate;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].checkout_date = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].bookingDetails.checkoutDate;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].no_rooms = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].bookingDetails.noRooms;
+outputroot.reservation[count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].special_requests = inputroot.reservation[i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7].bookingDetails.specialRequests.join(",");
+
+count_i_reservation_a539e4f3_cedb_4c90_8f2e_6964a294dab7++;
+}
+return outputroot;
+};
+
+
+
+
+
+
+
+
+
+
+
+

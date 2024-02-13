@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint name="JSONGetEndpoint" xmlns="http://ws.apache.org/ns/synapse">
+    <http method="get" uri-template="https://run.mocky.io/v3/ab7add0f-87eb-4fc8-8eed-cfbb7231e4f1">
+        <suspendOnFailure>
+            <initialDuration>-1</initialDuration>
+            <progressionFactor>1.0</progressionFactor>
+        </suspendOnFailure>
+        <markForSuspension>
+            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+        </markForSuspension>
+    </http>
+</endpoint>
