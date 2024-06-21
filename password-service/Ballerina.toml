@@ -1,0 +1,10 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.5.0"
+  export = ["password_service"]
+  name = "password_service"
+  org = "choreo"
+  version = "1.0.0"
+
