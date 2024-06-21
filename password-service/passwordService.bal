@@ -1,7 +1,7 @@
 import ballerina/http;
 
 // Dummy dataset of passwords (in real scenarios, this would be a database or more secure storage)
-string[] dummyPasswords = ["password123", "letmein", "securepassword", "12345678"];
+string[] dummyPasswords = ["password123", "letmein", "securepassword", "12345678", "Hasintha@123"];
 
 // Function to check if the password is valid
 function findPassword(string password) returns boolean {
