@@ -17,17 +17,14 @@ function findPassword(string password) returns boolean {
 service /passwordService on new http:Listener(8080) {
 
     // Resource to handle POST requests to validate password
-    resource function post checkPassword(http:Caller caller, http:Request req) returns error? {
-        // Extract password from request payload
-        json payload = check req.getJsonPayload();
-        json password = check payload.password;
-        json responseJson;
+    resource function post checkPassword(@http:Payload PasswordEntry passwordEntry) returns ValidityResponse {
+        ValidityResponse responseJson;
 
-        if (password.toString() == "") {
+        if (passwordEntry.password == "") {
             responseJson = {  "isValid": false, "message": "Password is empty." };
         } else {
             // Validate the password
-            boolean isFound = findPassword(password.toString());
+            boolean isFound = findPassword(passwordEntry.password);
 
             // Prepare response based on validation result
             if (!isFound) {
@@ -36,9 +33,16 @@ service /passwordService on new http:Listener(8080) {
                 responseJson = { "isValid": false, "message": "Password found in password directory. Please try a different password." };
             }
         }
-
         // Send response
-        var response = caller->respond(responseJson);
-        check response;
+        return responseJson;
     }
 }
+
+public type PasswordEntry record {|
+    string password;
+|};
+
+public type ValidityResponse record {|
+    boolean isValid;
+    string message;
+|};
