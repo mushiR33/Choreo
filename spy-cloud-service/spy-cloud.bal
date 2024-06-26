@@ -1,5 +1,6 @@
 import ballerina/http;
-import ballerina/io;
+//import ballerina/io;
+import ballerina/log;
 import wso2/choreo.sendemail;
 
 type PasswordHash record {
@@ -55,17 +56,26 @@ public function main() returns error? {
         string firstFiveChars = user.passwordHash.substring(0, 5);
         json|error? sendPasswordHashesResult = sendPasswordHashes(firstFiveChars);
         if sendPasswordHashesResult is error {
-            io:println(sendPasswordHashesResult.cause());
+            log:printError("Error in response", sendPasswordHashesResult);
         } else {
-             map<json> countsOfPasswords = check sendPasswordHashesResult.ensureType();
-             json countJson = countsOfPasswords[user.passwordHash];
-             int reusedCount = check countJson.count;
-             if (reusedCount > allowedReusedCount) {
-                io:println("*****Send Email*****");
-                // Send the email
-                string _ = check emailClient->sendEmail(user.email, emailSubject, "Your password has been compromised! Please make sure to reset it before the next login!");
-                io:println("Successfully sent the email.");
-             }
+            json|error? errMessage = sendPasswordHashesResult.message;
+            if sendPasswordHashesResult is json && errMessage is json {
+                log:printError("Error in response: " + errMessage.toString());
+            } else {
+                map<json>|error? countsOfPasswords = check sendPasswordHashesResult.ensureType();
+                if countsOfPasswords is map<json> {
+                    json countJson = countsOfPasswords[user.passwordHash];
+                    int reusedCount = check countJson.count;
+                    if (reusedCount > allowedReusedCount) {
+                        log:printInfo("*****Send Email*****");
+                        // Send the email
+                        string _ = check emailClient->sendEmail(user.email, emailSubject, "Your password has been compromised! Please make sure to reset it before the next login!");
+                        log:printInfo("Successfully sent the email.");
+                    }
+                } else {
+                    log:printError("Error in response: ", countsOfPasswords);
+                }
+            }
         }
     }
 }
