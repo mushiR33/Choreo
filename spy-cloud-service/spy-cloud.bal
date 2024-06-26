@@ -1,6 +1,13 @@
 import ballerina/http;
 import ballerina/log;
 import wso2/choreo.sendemail;
+import ballerinax/googleapis.gmail;
+import ballerina/io;
+
+configurable string googleRefreshToken = ?;
+configurable string googleClientSecret = ?;
+configurable string googleClientId = ?;
+configurable boolean isDebugEnabled = false;
 
 type PasswordHash record {
     string hash;
@@ -25,14 +32,12 @@ User[] users = [
     {userid: "user2", email: "hasintha@wso2.com", passwordHash: "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72"},
     {userid: "user3", email: "vihanga@wso2.com", passwordHash: "8e6d5067a6cc645877b5cd39a41027981cbc8bde52af816b0b300a085958c252"}
 ];
-
 http:Client passwordHashApiClient = check new ("https://api.spycloud.io");
 // Create a new email client
 sendemail:Client emailClient = check new ();
-const string EMAIL_TEMPLATE_FILE_PATH = "password-reset.html";
+const string EMAIL_TEMPLATE_FILE_PATH = "resources/pic-email-template.html";
 
 // Define the path parameter
-string pathParam = "somePathParam";
 string emailSubject = "[URGENT] Reset Password";
 int allowedReusedCount = 100;
 
@@ -51,6 +56,19 @@ function sendPasswordHashes(string hashValue) returns json|error? {
 }
 
 public function main() returns error? {
+    gmail:ConnectionConfig gmailConfig = {
+        auth: {
+            refreshUrl: gmail:REFRESH_URL,
+            refreshToken: googleRefreshToken,
+            clientId: googleClientId,
+            clientSecret: googleClientSecret
+        }
+    };
+
+    string emailTemplate = check io:fileReadString(EMAIL_TEMPLATE_FILE_PATH);
+    gmail:Client gmailClient = check new (gmailConfig);
+    string userId = "me";
+
     foreach var user in users {
         string firstFiveChars = user.passwordHash.substring(0, 5);
         json|error? sendPasswordHashesResult = sendPasswordHashes(firstFiveChars);
@@ -67,9 +85,19 @@ public function main() returns error? {
                     int reusedCount = check countJson.count;
                     if (reusedCount > allowedReusedCount) {
                         log:printInfo("*****Send Email*****");
+                        gmail:MessageRequest amMessageRequest = {
+                        recipient: user.email,
+                        subject: emailSubject,
+                        messageBody: emailTemplate,
+                        contentType: gmail:TEXT_HTML,
+                        sender: "Staples <admin@staples.com>"
+                    };
                         // Send the email
-                        string _ = check emailClient->sendEmail(user.email, emailSubject, "Your password has been compromised! Please make sure to reset it before the next login!");
-                        log:printInfo("Successfully sent the email.");
+                        gmail:Message amGmailResponse = check gmailClient->sendMessage(amMessageRequest, userId = userId);
+                        log:printInfo("### Email sent successfully: " + user.email);
+                        if (isDebugEnabled) {
+                            log:printInfo("DEBUG: Gmail response for AM: " + amGmailResponse.toString());
+                        }
                     }
                 } else {
                     log:printError("Error in response: ", countsOfPasswords);
