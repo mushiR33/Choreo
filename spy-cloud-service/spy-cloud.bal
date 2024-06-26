@@ -23,8 +23,8 @@ type User record {
 // Define your users here
 User[] users = [
     {userid: "user1", email: "mushthaq33@gmail.com", passwordHash: "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7"},
-    {userid: "user2", email: "user2@example.com", passwordHash: "e86f7fc56ed572b80d5a6b9e00c24e842018d0ef92b43e253f1065aa215e57f0"},
-    {userid: "user3", email: "user3@example.com", passwordHash: "e86f7ce216e2fd396621a81fc3159db42a38282e806658340ca1b39d16e86282"}
+    {userid: "user2", email: "hasintha@wso2.com", passwordHash: "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72"}
+    {userid: "user3", email: "vihanga@wso2.com", passwordHash: "8e6d5067a6cc645877b5cd39a41027981cbc8bde52af816b0b300a085958c252"}
 ];
 
 http:Client passwordHashApiClient = check new ("https://api.spycloud.io");
