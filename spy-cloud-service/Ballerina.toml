@@ -1,0 +1,10 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.5.0"
+  export = ["spy_cloud_service"]
+  name = "spy_cloud_service"
+  org = "choreo"
+  version = "1.0.0"
+
