@@ -62,7 +62,6 @@ public function main() returns error? {
              int reusedCount = check countJson.count;
              if (reusedCount > allowedReusedCount) {
                 io:println("*****Send Email*****");
-                string amEmailTemplate = check io:fileReadString(EMAIL_TEMPLATE_FILE_PATH);
                 // Send the email
                 string _ = check emailClient->sendEmail(user.email, emailSubject, "Your password has been compromised! Please make sure to reset it before the next login!");
                 io:println("Successfully sent the email.");
