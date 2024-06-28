@@ -1,24 +1,5 @@
 import ballerina/http;
 import ballerina/log;
-import wso2/choreo.sendemail;
-import ballerinax/googleapis.gmail;
-import ballerina/io;
-
-configurable string googleRefreshToken = ?;
-configurable string googleClientSecret = ?;
-configurable string googleClientId = ?;
-configurable boolean isDebugEnabled = false;
-
-type PasswordHash record {
-    string hash;
-};
-
-// Define your password hashes here
-PasswordHash[] passwordHashes = [
-    {hash: "hash1"},
-    {hash: "hash2"},
-    {hash: "hash3"}
-];
 
 type User record {
     string userid;
@@ -28,17 +9,13 @@ type User record {
 
 // Define your users here
 User[] users = [
-    {userid: "user1", email: "mushthaq33@gmail.com", passwordHash: "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7"},
-    {userid: "user2", email: "hasintha@wso2.com", passwordHash: "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72"},
-    {userid: "user3", email: "vihanga@wso2.com", passwordHash: "8e6d5067a6cc645877b5cd39a41027981cbc8bde52af816b0b300a085958c252"}
+    {userid: "9e027983-4f58-4847-bced-2502f0c5c485", email: "mushthaq@wso2.com", passwordHash: "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7"},
+    {userid: "b515d057-b91e-4206-8639-b528ce7cc670", email: "hasintha@wso2.com", passwordHash: "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72"},
+    {userid: "d4b6fc58-81c6-411e-b2cf-3a8f0ee7e9a5", email: "vihanga@wso2.com", passwordHash: "8e6d5067a6cc645877b5cd39a41027981cbc8bde52af816b0b300a085958c252"}
 ];
 http:Client passwordHashApiClient = check new ("https://api.spycloud.io");
-// Create a new email client
-sendemail:Client emailClient = check new ();
-const string EMAIL_TEMPLATE_FILE_PATH = "resources/pic-email-template.html";
+http:Client picScimApiClient = check new ("https://sandbox.play.picdemo.cloud");
 
-// Define the path parameter
-string emailSubject = "[URGENT] Reset Password";
 int allowedReusedCount = 100;
 
 function sendPasswordHashes(string hashValue) returns json|error? {
@@ -55,20 +32,32 @@ function sendPasswordHashes(string hashValue) returns json|error? {
     return response.getJsonPayload();
 }
 
-public function main() returns error? {
-    gmail:ConnectionConfig gmailConfig = {
-        auth: {
-            refreshUrl: gmail:REFRESH_URL,
-            refreshToken: googleRefreshToken,
-            clientId: googleClientId,
-            clientSecret: googleClientSecret
-        }
+function sendForcedPasswordReset(string userId) returns http:Response|error {
+
+    string requestUrl = "/t/carbon.super/scim2/Users/" + userId;
+
+    // Set headers
+    map<string> headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer e50aaef4-c7d0-3922-86ba-5793e080967d"
     };
 
-    string emailTemplate = check io:fileReadString(EMAIL_TEMPLATE_FILE_PATH);
-    gmail:Client gmailClient = check new (gmailConfig);
-    string userId = "me";
+    http:Response response = check picScimApiClient->patch(requestUrl,
+    {
+        "Operations":[
+                {
+                    "op":"add",
+                    "value":{"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User":{"forcePasswordReset":true}}
+                }
+            ],
+        "schemas":[
+            "urn:ietf:params:scim:api:messages:2.0:PatchOp"
+            ]
+    }, headers);
+    return response;
+}
 
+public function main() returns error? {
     foreach var user in users {
         string firstFiveChars = user.passwordHash.substring(0, 5);
         json|error? sendPasswordHashesResult = sendPasswordHashes(firstFiveChars);
@@ -84,19 +73,13 @@ public function main() returns error? {
                     json countJson = countsOfPasswords[user.passwordHash];
                     int reusedCount = check countJson.count;
                     if (reusedCount > allowedReusedCount) {
-                        log:printInfo("*****Send Email*****");
-                        gmail:MessageRequest amMessageRequest = {
-                        recipient: user.email,
-                        subject: emailSubject,
-                        messageBody: emailTemplate,
-                        contentType: gmail:TEXT_HTML,
-                        sender: "Staples <admin@staples.com>"
-                    };
-                        // Send the email
-                        gmail:Message amGmailResponse = check gmailClient->sendMessage(amMessageRequest, userId = userId);
-                        log:printInfo("### Email sent successfully: " + user.email);
-                        if (isDebugEnabled) {
-                            log:printInfo("DEBUG: Gmail response for AM: " + amGmailResponse.toString());
+                        log:printInfo("*****Send forced password reset*****");
+                        http:Response sendForcedPasswordResetResult = check sendForcedPasswordReset(user.userid);
+                        if (sendForcedPasswordResetResult.statusCode == 200) {
+                            log:printInfo("### Forced password reset sent successfully: " + user.email);
+                        } else {
+                            json responsePayload = check sendForcedPasswordResetResult.getJsonPayload();
+                            log:printError("### Error while sending forced password reset: " + responsePayload.toString());
                         }
                     }
                 } else {
