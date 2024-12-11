@@ -1,0 +1,9 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.5.0"
+  name = "asgardeo_sf_service"
+  org = "choreo"
+  version = "1.0.0"
+
