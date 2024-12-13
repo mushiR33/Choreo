@@ -9,9 +9,7 @@ type User record {
 
 // Define your users here
 User[] users = [
-    {userid: "9e027983-4f58-4847-bced-2502f0c5c485", email: "mushthaq@wso2.com", passwordHash: "e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7"},
-    {userid: "b515d057-b91e-4206-8639-b528ce7cc670", email: "hasintha@wso2.com", passwordHash: "3e7c19576488862816f13b512cacf3e4ba97dd97243ea0bd6a2ad1642d86ba72"},
-    {userid: "d4b6fc58-81c6-411e-b2cf-3a8f0ee7e9a5", email: "vihanga@wso2.com", passwordHash: "8e6d5067a6cc645877b5cd39a41027981cbc8bde52af816b0b300a085958c252"}
+    {userid: "", email: "", passwordHash: ""}
 ];
 http:Client passwordHashApiClient = check new ("https://api.spycloud.io");
 http:Client picScimApiClient = check new ("https://sandbox.play.picdemo.cloud");
