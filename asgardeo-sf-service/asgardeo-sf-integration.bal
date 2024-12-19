@@ -45,9 +45,7 @@ service asgardeo:RegistrationService on webhookListener {
 
         record {} leadRecord = {
             "Company": "WSO2",
-            "Email": email,
-            "FirstName": "Test",
-            "LastName": "User"
+            "Email": email
         };
 
         salesforce:CreationResponse|error res = baseClient->create("Lead", leadRecord);
