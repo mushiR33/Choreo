@@ -42,12 +42,12 @@ service asgardeo:RegistrationService on webhookListener {
         // string lastName = <string>userClaims["http://wso2.org/claims/lastname"];
         // string firstName = <string>userClaims["http://wso2.org/claims/givenname"];
         string email = <string>userClaims["http://wso2.org/claims/emailaddress"];
+        string lastName = email.substring(0, <int>email.indexOf("@"));
 
         record {} leadRecord = {
             "Company": "WSO2",
             "Email": email,
-            //"FirstName": "Test",
-            "LastName": "User"
+            "LastName": lastName
         };
 
         salesforce:CreationResponse|error res = baseClient->create("Lead", leadRecord);
