@@ -44,7 +44,8 @@ service asgardeo:RegistrationService on webhookListener {
         string firstName = <string>userClaims["http://wso2.org/claims/givenname"];
         string email = <string>userClaims["http://wso2.org/claims/emailaddress"];
 
-        string query = string `SELECT Id FROM Lead WHERE LastName = '${lastName}' LIMIT 1`;
+        string query =  "SELECT Id FROM Lead WHERE LastName = '" + lastName + "' LIMIT 1";
+        log:printInfo("SOQL: " + query);
 
         stream<record {| anydata...; |}, error?>|error masterLeadResult = check baseClient->query(query);
 
@@ -59,6 +60,7 @@ service asgardeo:RegistrationService on webhookListener {
         string masterLeadId = "";
 
         record {| anydata...; |}? | error leadRecord = check masterLeadStream.next();
+        log:printInfo((check leadRecord).toString());
 
         if leadRecord is record {| anydata...; |} {
             if leadRecord.hasKey("Id") {
