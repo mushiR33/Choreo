@@ -46,7 +46,7 @@ service asgardeo:RegistrationService on webhookListener {
 
         string query =  "SELECT Id FROM Lead WHERE LastName = '" + lastName + "' LIMIT 1";
         log:printInfo("SOQL: " + query);
-
+        
         stream<record {| anydata...; |}, error?>|error masterLeadResult = check baseClient->query(query);
 
         if masterLeadResult is error {
@@ -54,26 +54,30 @@ service asgardeo:RegistrationService on webhookListener {
             return;
         }
 
-        stream<record {| anydata...; |}, error?> masterLeadStream = masterLeadResult;
-
         error? e;
         string masterLeadId = "";
 
-        record {| anydata...; |}? | error leadRecord = check masterLeadStream.next();
-        log:printInfo((check leadRecord).toString());
+        record {| anydata...; |}? | error leadRecordValue = check masterLeadResult.next();
+        log:printInfo((check leadRecordValue).toString());
 
-        if leadRecord is record {| anydata...; |} {
-            if leadRecord.hasKey("Id") {
-                masterLeadId = leadRecord["Id"].toString();
-                log:printInfo("Master Lead found with ID: " + masterLeadId);
+        if leadRecordValue is record {| anydata...; |} {
+            if leadRecordValue.hasKey("value") && leadRecordValue["value"] is record {| anydata...; |} {
+                record {| anydata...; |} leadRecord = <record {|anydata...;|}>leadRecordValue["value"];
+                // Access `Id` safely
+                if leadRecord.hasKey("Id") {
+                    masterLeadId = leadRecord["Id"].toString();
+                    log:printInfo("Master Lead found with ID: " + masterLeadId); // Output: Id: 00Qak00000ETo9REAT
+                } else {
+                    log:printInfo("Id not found in value.");
+                }
             }
-        } else if leadRecord is error {
+        } else if leadRecordValue is error {
             log:printInfo("Error while retrieving lead records: ");
             return;
         }
 
         // Close the stream
-        e = masterLeadStream.close();
+        e = masterLeadResult.close();
         if e is error {
             log:printInfo("Error closing stream: " + e.toString());
         }
