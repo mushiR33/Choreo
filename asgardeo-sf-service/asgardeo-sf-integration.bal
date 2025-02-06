@@ -58,14 +58,14 @@ service asgardeo:RegistrationService on webhookListener {
         error? e;
         string masterLeadId = "";
 
-        record {| anydata...; |}? leadRecord = check masterLeadStream.next();
+        record {| anydata...; |}? | error leadRecord = check masterLeadStream.next();
 
         if leadRecord is record {| anydata...; |} {
             if leadRecord.hasKey("Id") {
                 masterLeadId = leadRecord["Id"].toString();
                 log:printInfo("Master Lead found with ID: " + masterLeadId);
             }
-        } else {
+        } else if leadRecord is error {
             log:printInfo("Error while retrieving lead records: ");
             return;
         }
