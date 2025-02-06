@@ -44,7 +44,7 @@ service asgardeo:RegistrationService on webhookListener {
         string firstName = <string>userClaims["http://wso2.org/claims/givenname"];
         string email = <string>userClaims["http://wso2.org/claims/emailaddress"];
 
-        string query = string `SELECT Id FROM Lead WHERE Email = '${lastName}' LIMIT 1`;
+        string query = string `SELECT Id FROM Lead WHERE LastName = '${lastName}' LIMIT 1`;
 
         stream<record {| anydata...; |}, error?>|error masterLeadResult = check baseClient->query(query);
 
