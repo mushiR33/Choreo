@@ -38,24 +38,74 @@ service asgardeo:RegistrationService on webhookListener {
 
         map<json> mj = <map<json>> responseData;
         map<json> userClaims = <map<json>> mj.get("claims");
+        record {} newLeadRecord = {};
         
-        // string lastName = <string>userClaims["http://wso2.org/claims/lastname"];
-        // string firstName = <string>userClaims["http://wso2.org/claims/givenname"];
+        string lastName = <string>userClaims["http://wso2.org/claims/lastname"];
+        string firstName = <string>userClaims["http://wso2.org/claims/givenname"];
         string email = <string>userClaims["http://wso2.org/claims/emailaddress"];
-        string lastName = email.substring(0, <int>email.indexOf("@"));
 
-        record {} leadRecord = {
-            "Company": "WSO2",
-            "Email": email,
-            "LastName": lastName
-        };
+        string query = string `SELECT Id FROM Lead WHERE Email = '${lastName}' LIMIT 1`;
 
-        salesforce:CreationResponse|error res = baseClient->create("Lead", leadRecord);
+        stream<record {| anydata...; |}, error?>|error masterLeadResult = check baseClient->query(query);
 
-        if res is salesforce:CreationResponse {
-            log:printInfo("Lead Created Successfully. Lead ID : " + res.id);
+        if masterLeadResult is error {
+            log:printInfo("Error querying master lead: ", masterLeadResult);
+            return;
+        }
+
+        stream<record {| anydata...; |}, error?> masterLeadStream = masterLeadResult;
+
+        error? e;
+        string masterLeadId = "";
+
+        record {| anydata...; |}? leadRecord = check masterLeadStream.next();
+
+        if leadRecord is record {| anydata...; |} {
+            if leadRecord.hasKey("Id") {
+                masterLeadId = leadRecord["Id"].toString();
+                log:printInfo("Master Lead found with ID: " + masterLeadId);
+            }
         } else {
-            log:printError(msg = res.message());
+            log:printInfo("Error while retrieving lead records: ");
+            return;
+        }
+
+        // Close the stream
+        e = masterLeadStream.close();
+        if e is error {
+            log:printInfo("Error closing stream: " + e.toString());
+        }
+
+        // If a Master Lead was found, create a new lead and link it
+        if masterLeadId != "" {
+            newLeadRecord = {
+                "Company": "WSO2",
+                "Email": email,
+                "FirstName": firstName,
+                "LastName": lastName,
+                "Master_Lead__c": masterLeadId
+            };
+                salesforce:CreationResponse|error res = baseClient->create("Lead", newLeadRecord);
+
+            if res is salesforce:CreationResponse {
+            log:printInfo("Lead Created Successfully. Lead ID : " + res.id + " and linked to Master Lead ID : " + masterLeadId);
+            } else {
+                log:printError(msg = res.message());
+            }
+        } else {
+            log:printInfo("No Master Lead found.");
+            newLeadRecord = {
+                    "Company": "WSO2",
+                    "Email": email,
+                    "FirstName": firstName,
+                    "LastName": lastName
+                };
+                salesforce:CreationResponse|error res = baseClient->create("Lead", newLeadRecord);
+                if res is salesforce:CreationResponse {
+                    log:printInfo("Lead Created Successfully. Lead ID : " + res.id);
+                } else {
+                    log:printError(msg = res.message());
+                }
         }
     }
 
